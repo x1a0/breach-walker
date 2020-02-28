@@ -4,6 +4,13 @@ Breach walker
 A pathfinder for breach world in BatMud.
 
 
+How to install
+--------------
+
+- Install Rust: https://rustup.rs/.
+- Run `cargo install --path .` at root of this repo.
+
+
 How to use
 ----------
 
@@ -24,6 +31,7 @@ This macro reads player current location from PROMPT so you need to have
 ;; /breach_go x:y
 ;; If x:y is not provided it will go back to where you call this last time, as
 ;; a return trip.
+
 /def -i breach_go=\
   /if ({#} < 1) \
     /let _dest=%{bgo_last_from}%;\
@@ -37,6 +45,4 @@ This macro reads player current location from PROMPT so you need to have
 /def breach_go_do=\
   /set bgo_last_from=%{1}%;\
   /quote -dsend !breach-walker %{1} %{2}%;
-
-;;; }}}
 ```
