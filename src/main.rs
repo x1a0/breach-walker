@@ -79,7 +79,12 @@ fn main() {
         &map_data,
     );
 
-    print!("{}", steps.join(";"));
+    let steps = steps
+        .chunks(20)
+        .map(|chunk| chunk.join(";"))
+        .collect::<Vec<String>>();
+
+    print!("{}", steps.join("\n"));
 }
 
 fn dfs(
@@ -99,7 +104,7 @@ fn dfs(
         // out of bounds
         return false;
     } else if !map_data[from_y as usize][from_x as usize] {
-        // hit obstale
+        // hit obstacle
         return false;
     } else if visited.contains(&(from_x as usize, from_y as usize)) {
         // been here
@@ -141,8 +146,8 @@ fn dfs(
     false
 }
 
-fn parse_coord(coordinate: &String) -> (usize, usize) {
-    let split: Vec<&str> = coordinate.split(":").collect();
+fn parse_coord(coordinate: &str) -> (usize, usize) {
+    let split: Vec<&str> = coordinate.split(':').collect();
     let x: usize = split[0].parse().unwrap();
     let y: usize = split[1].parse().unwrap();
     (x, y)
